@@ -7,6 +7,8 @@ import { ProcurementModule } from "./procurement/procurement.module";
 import { FeedbackModule } from "./feedback/feedback.module";
 import { ContractModule } from "./contract/contract.module";
 import { UserModule } from "./user/user.module";
+import { PermissionModule } from "./permission/permission.module";
+import { RoleModule } from "./role/role.module";
 import { RolesAndPermissionsModule } from "./RolesAndPermissions/rolesandpermissions.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
@@ -33,6 +35,8 @@ import { AuthModule } from "./auth/auth.module";
     FeedbackModule,
     ContractModule,
     UserModule,
+    PermissionModule,
+    RoleModule,
     RolesAndPermissionsModule,
     HealthModule,
     PrismaModule,

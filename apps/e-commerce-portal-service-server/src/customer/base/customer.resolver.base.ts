@@ -30,6 +30,8 @@ import { FeedbackFindManyArgs } from "../../feedback/base/FeedbackFindManyArgs";
 import { Feedback } from "../../feedback/base/Feedback";
 import { JobOrderFindManyArgs } from "../../jobOrder/base/JobOrderFindManyArgs";
 import { JobOrder } from "../../jobOrder/base/JobOrder";
+import { RoleFindManyArgs } from "../../role/base/RoleFindManyArgs";
+import { Role } from "../../role/base/Role";
 import { CustomerService } from "../customer.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Customer)
@@ -178,6 +180,26 @@ export class CustomerResolverBase {
     @graphql.Args() args: JobOrderFindManyArgs
   ): Promise<JobOrder[]> {
     const results = await this.service.findJobOrders(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Role], { name: "roles" })
+  @nestAccessControl.UseRoles({
+    resource: "Role",
+    action: "read",
+    possession: "any",
+  })
+  async findRoles(
+    @graphql.Parent() parent: Customer,
+    @graphql.Args() args: RoleFindManyArgs
+  ): Promise<Role[]> {
+    const results = await this.service.findRoles(parent.id, args);
 
     if (!results) {
       return [];

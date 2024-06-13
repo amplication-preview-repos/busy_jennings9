@@ -15,6 +15,7 @@ import { IsString, IsOptional, ValidateNested, IsDate } from "class-validator";
 import { FeedbackCreateNestedManyWithoutCustomersInput } from "./FeedbackCreateNestedManyWithoutCustomersInput";
 import { Type } from "class-transformer";
 import { JobOrderCreateNestedManyWithoutCustomersInput } from "./JobOrderCreateNestedManyWithoutCustomersInput";
+import { RoleCreateNestedManyWithoutCustomersInput } from "./RoleCreateNestedManyWithoutCustomersInput";
 
 @InputType()
 class CustomerCreateInput {
@@ -85,6 +86,18 @@ class CustomerCreateInput {
     nullable: true,
   })
   phone?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => RoleCreateNestedManyWithoutCustomersInput,
+  })
+  @ValidateNested()
+  @Type(() => RoleCreateNestedManyWithoutCustomersInput)
+  @IsOptional()
+  @Field(() => RoleCreateNestedManyWithoutCustomersInput, {
+    nullable: true,
+  })
+  roles?: RoleCreateNestedManyWithoutCustomersInput;
 
   @ApiProperty({
     required: false,

@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { FeedbackListRelationFilter } from "../../feedback/base/FeedbackListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { JobOrderListRelationFilter } from "../../jobOrder/base/JobOrderListRelationFilter";
+import { RoleListRelationFilter } from "../../role/base/RoleListRelationFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 
 @InputType()
@@ -99,6 +100,18 @@ class CustomerWhereInput {
     nullable: true,
   })
   phone?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => RoleListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => RoleListRelationFilter)
+  @IsOptional()
+  @Field(() => RoleListRelationFilter, {
+    nullable: true,
+  })
+  roles?: RoleListRelationFilter;
 
   @ApiProperty({
     required: false,

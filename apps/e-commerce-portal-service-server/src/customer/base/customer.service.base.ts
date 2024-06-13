@@ -16,6 +16,7 @@ import {
   Customer as PrismaCustomer,
   Feedback as PrismaFeedback,
   JobOrder as PrismaJobOrder,
+  Role as PrismaRole,
 } from "@prisma/client";
 
 export class CustomerServiceBase {
@@ -71,5 +72,16 @@ export class CustomerServiceBase {
         where: { id: parentId },
       })
       .jobOrders(args);
+  }
+
+  async findRoles(
+    parentId: string,
+    args: Prisma.RoleFindManyArgs
+  ): Promise<PrismaRole[]> {
+    return this.prisma.customer
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .roles(args);
   }
 }

@@ -32,6 +32,7 @@ model Customer {
   jobOrders        JobOrder[]
   name             String?
   phone            String?
+  roles            Role[]
   subscriptionDate DateTime?
   updatedAt        DateTime   @updatedAt
 }
@@ -95,10 +96,51 @@ model User {
   username  String   @unique
 }
 
+model Permission {
+  actions         EnumPermissionActions?
+  contractRole    String?
+  createdAt       DateTime               @default(now())
+  customerRole    String?
+  entity          String?
+  feedbackRole    String?
+  id              String                 @id @default(cuid())
+  inventoryRole   String?
+  jobOrderRole    String?
+  procurementRole String?
+  role            Role?                  @relation(fields: [roleId], references: [id])
+  roleId          String?
+  updatedAt       DateTime               @updatedAt
+}
+
+model Role {
+  businessAnalyst               String?
+  businessManager               String?
+  ceo                           String?
+  contractsManager              String?
+  createdAt                     DateTime     @default(now())
+  customer                      Customer?    @relation(fields: [customerId], references: [id])
+  customerId                    String?
+  customerServiceRepresentative String?
+  description                   String?
+  id                            String       @id @default(cuid())
+  inventoryManager              String?
+  name                          String?
+  permissions                   Permission[]
+  procurementManager            String?
+  salesRepresentative           String?
+  systemAdministrator           String?
+  technician                    String?
+  updatedAt                     DateTime     @updatedAt
+}
+
 enum EnumJobOrderStatus {
   Option1
 }
 
 enum EnumProcurementStatus {
+  Option1
+}
+
+enum EnumPermissionActions {
   Option1
 }

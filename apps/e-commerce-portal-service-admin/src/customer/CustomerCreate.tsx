@@ -12,6 +12,7 @@ import {
 
 import { FeedbackTitle } from "../feedback/FeedbackTitle";
 import { JobOrderTitle } from "../jobOrder/JobOrderTitle";
+import { RoleTitle } from "../role/RoleTitle";
 
 export const CustomerCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -37,6 +38,14 @@ export const CustomerCreate = (props: CreateProps): React.ReactElement => {
         </ReferenceArrayInput>
         <TextInput label="name" source="name" />
         <TextInput label="phone" source="phone" />
+        <ReferenceArrayInput
+          source="roles"
+          reference="Role"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={RoleTitle} />
+        </ReferenceArrayInput>
         <DateTimeInput label="subscriptionDate" source="subscriptionDate" />
       </SimpleForm>
     </Create>

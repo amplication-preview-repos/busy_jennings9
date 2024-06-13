@@ -1,5 +1,6 @@
 import { FeedbackUpdateManyWithoutCustomersInput } from "./FeedbackUpdateManyWithoutCustomersInput";
 import { JobOrderUpdateManyWithoutCustomersInput } from "./JobOrderUpdateManyWithoutCustomersInput";
+import { RoleUpdateManyWithoutCustomersInput } from "./RoleUpdateManyWithoutCustomersInput";
 
 export type CustomerUpdateInput = {
   address?: string | null;
@@ -8,5 +9,6 @@ export type CustomerUpdateInput = {
   jobOrders?: JobOrderUpdateManyWithoutCustomersInput;
   name?: string | null;
   phone?: string | null;
+  roles?: RoleUpdateManyWithoutCustomersInput;
   subscriptionDate?: Date | null;
 };

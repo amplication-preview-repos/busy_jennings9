@@ -1,5 +1,6 @@
 import { Feedback } from "../feedback/Feedback";
 import { JobOrder } from "../jobOrder/JobOrder";
+import { Role } from "../role/Role";
 
 export type Customer = {
   address: string | null;
@@ -10,6 +11,7 @@ export type Customer = {
   jobOrders?: Array<JobOrder>;
   name: string | null;
   phone: string | null;
+  roles?: Array<Role>;
   subscriptionDate: Date | null;
   updatedAt: Date;
 };

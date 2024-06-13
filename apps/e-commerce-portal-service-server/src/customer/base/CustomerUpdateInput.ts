@@ -15,6 +15,7 @@ import { IsString, IsOptional, ValidateNested, IsDate } from "class-validator";
 import { FeedbackUpdateManyWithoutCustomersInput } from "./FeedbackUpdateManyWithoutCustomersInput";
 import { Type } from "class-transformer";
 import { JobOrderUpdateManyWithoutCustomersInput } from "./JobOrderUpdateManyWithoutCustomersInput";
+import { RoleUpdateManyWithoutCustomersInput } from "./RoleUpdateManyWithoutCustomersInput";
 
 @InputType()
 class CustomerUpdateInput {
@@ -85,6 +86,18 @@ class CustomerUpdateInput {
     nullable: true,
   })
   phone?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => RoleUpdateManyWithoutCustomersInput,
+  })
+  @ValidateNested()
+  @Type(() => RoleUpdateManyWithoutCustomersInput)
+  @IsOptional()
+  @Field(() => RoleUpdateManyWithoutCustomersInput, {
+    nullable: true,
+  })
+  roles?: RoleUpdateManyWithoutCustomersInput;
 
   @ApiProperty({
     required: false,
